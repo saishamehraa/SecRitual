@@ -1,6 +1,6 @@
 package-lock.json
 node_modules/
-
+pnpm-lock.yaml
 build/
 .env
 test_clone/
