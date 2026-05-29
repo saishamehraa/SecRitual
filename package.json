@@ -7,7 +7,6 @@
   "scripts": {
     "dev": "pnpm -r --parallel dev",
     "build": "pnpm -r build",
-    "start": "pnpm --filter @secritual/backend start",
-    "install": "pnpm install"
+    "start": "pnpm --filter @secritual/backend start"
   }
 }
