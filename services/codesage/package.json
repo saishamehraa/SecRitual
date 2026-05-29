@@ -1,0 +1,9 @@
+{
+  "name": "@secritual/codesage",
+  "version": "1.0.0",
+  "private": true,
+  "main": "index.js",
+  "scripts": {
+    "start": "echo \"CodeSage active\""
+  }
+}

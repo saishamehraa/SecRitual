@@ -1,0 +1,13 @@
+{
+  "name": "secritual-ai-monorepo",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "pnpm -r --parallel dev",
+    "build": "pnpm -r build",
+    "start": "pnpm --filter @secritual/backend start",
+    "install": "pnpm install"
+  }
+}
