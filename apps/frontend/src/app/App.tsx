@@ -279,7 +279,8 @@ function AgentFeed() {
     feedListeners.add(setLogs);
 
     if (!evtSource) {
-      evtSource = new EventSource("http://localhost:4000/stream");
+      const baseUrl = import.meta.env.DEV ? "http://localhost:4000" : "";
+      evtSource = new EventSource(`${baseUrl}/stream`);
       evtSource.onmessage = (event) => {
         try {
           const data = JSON.parse(event.data);
@@ -941,7 +942,8 @@ function RepoSecurityPage() {
     updateVerdict({ verdict: 'PENDING', vulnerabilities: [], remediationPlan: [] });
     
     // Trigger global backend debate
-    fetch('http://localhost:4000/api/scan-repo', {
+    const baseUrl = import.meta.env.DEV ? "http://localhost:4000" : "";
+    fetch(`${baseUrl}/api/scan-repo`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ repoUrl: repoUrl || 'apps/backend/src' })
