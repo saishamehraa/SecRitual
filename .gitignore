@@ -6,3 +6,4 @@ build/
 test_clone/
 tmp_repo_*/
 tmp_repo_*
+take_screenshots.js

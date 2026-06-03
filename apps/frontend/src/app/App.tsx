@@ -556,7 +556,10 @@ function DashboardPage() {
           <AgentFeed />
         </GlassCard>
         
-        <IncidentTimeline logs={logs} />
+        <div className="space-y-4">
+          <FoundryIQPanel rationale={liveVerdict?.foundryIqEvidence} />
+          <IncidentTimeline logs={logs} />
+        </div>
       </div>
     </div>
   );

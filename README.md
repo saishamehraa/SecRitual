@@ -14,9 +14,15 @@
 ![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-0055FF?style=for-the-badge&logo=framer&logoColor=white)
 
+### 📌 Quick Links
+- [🎬 Watch the Demo Video](#-the-winning-demo-flow)
+- [📸 View Screenshots](#-platform-interface)
+- [🏛️ Architecture Diagram](#-system-architecture)
+- [🚀 Getting Started](#-getting-started)
+
 Built for the Microsoft Agents League Hackathon to demonstrate how AI can securely reason about deployment trust, risk paths, and governance before code ever reaches production.
 
-SecRitual AI is an **explainable security decision engine** that orchestrates multiple autonomous agents to reason over AI prompts, LLM workflows, and code repositories. Instead of merely surfacing alerts, SecRitual acts as an **"AI Security Courtroom"**—where agents debate risk, synthesize confidence, and validate deployment integrity to produce context-aware, evidence-backed verdicts.
+SecRitual AI is an **explainable security decision engine** that orchestrates multiple autonomous agents to reason over AI prompts, LLM workflows, and code repositories. Instead of merely surfacing alerts, SecRitual acts as a **"Trust Governance Engine"**—where agents debate risk, synthesize confidence, and validate deployment integrity to produce context-aware, evidence-backed verdicts.
 
 **SecRitual AI grounds the entire security lifecycle:**  
 `Prompt Analysis → Agent Debate → Risk Grounding → Deployment Trust Verdict`
@@ -61,7 +67,7 @@ The system synthesizes these reasoning streams to generate a **Deployment Trust 
 SecRitual AI was built specifically to demonstrate the power of **Multi-Step Reasoning Agents** and **Microsoft AI Ecosystems**:
 
 * 🧠 **Reasoning Agents Track**: Features a true multi-agent debate mode where agents (PromptShield, CodeSage, SIFTGuardian) detect threats, correlate risks, and synthesize a trust consensus before generating a deployment verdict.
-* 🌐 **Microsoft Foundry IQ Integration**: Utilizes Foundry IQ context-aware intelligence retrieval to ensure deployment reasoning is backed by enterprise-grade security evidence (e.g. historical ransomware indicators).
+* 🌐 **Microsoft Foundry IQ Integration**: The Orchestrator retrieves contextual enterprise evidence through the Foundry IQ Evidence Retrieval Layer before generating deployment trust verdicts. This evidence is incorporated into the multi-agent consensus process to produce explainable deployment decisions.
 * 🛡️ **Reliability & Safety**: Evaluates trust and validates deployment decisions to guarantee AI safety and prevent the execution of malicious code or prompts.
 * 💻 **AI-Assisted Development**: Built rapidly using GitHub Copilot and agentic workflows.
 
@@ -69,7 +75,7 @@ SecRitual AI was built specifically to demonstrate the power of **Multi-Step Rea
 
 ## 🤖 The Reasoning Agents
 
-SecRitual AI orchestrates four specialized intelligence units that participate in the "Security Courtroom":
+SecRitual AI orchestrates four specialized intelligence units that participate in the Trust Governance Engine:
 
 1. **PromptShield**: The AI Firewall. Reason about and intercept prompt injections, jailbreaks, and PII leaks.
 2. **SIFTGuardian**: The Threat Intelligence engine. Correlates dependency vulnerabilities with real-time exploit chatter to provide external evidence.
@@ -118,7 +124,7 @@ Our demo tells a cinematic story of trust orchestration and AI governance:
 3. **Threat Intelligence Activates**: SIFTGuardian surfaces external evidence for `express@4.18.2`.
 4. **Agents Debate in Realtime**: Watch the reasoning streams as the agents challenge assumptions and correlate the composite risk.
 5. **Trust Level Plummets**: The Security Trust Matrix visualizes the dropping confidence; the UI begins pulsing red.
-6. **Foundry IQ Grounding**: The Orchestrator validates the risk using Microsoft Foundry IQ's historical telemetry, ensuring zero hallucination.
+6. **Foundry IQ Evidence Retrieval Layer**: The Orchestrator retrieves contextual enterprise evidence through the Foundry IQ Evidence Retrieval Layer before generating deployment trust verdicts. This evidence is incorporated into the multi-agent consensus process to produce explainable deployment decisions.
 7. **Consensus Reached**: The Orchestrator dictates a grounded `BLOCK` verdict.
 8. **Deployment Blocked**: The pipeline halts. A comprehensive Explanation of Risk and Business Impact narrative is generated for human review.
 9. **AI Remediation**: CodeSage generates an explainable, drop-in patch to neutralize the SQL injection risk.
@@ -141,6 +147,12 @@ Our demo tells a cinematic story of trust orchestration and AI governance:
 
 ### 🌐 Threat Intelligence Grounding
 ![Threat Intelligence Feed](./docs/assets/threat-intel.png)
+
+### 🏢 Foundry IQ Evidence Panel
+![Foundry IQ Evidence Panel](./docs/assets/foundry-iq.png)
+
+### 🚨 Autonomous Deployment BLOCK Verdict
+![Deployment Block Verdict](./docs/assets/block-verdict.png)
 
 ---
 
@@ -259,7 +271,7 @@ Execute the `apps/backend/supabase_schema.sql` file in your Supabase SQL editor 
 
 SecRitual AI represents a future where AI does not simply monitor metrics—it actively reasons about trust.
 
-By combining AI debate, contextual evidence retrieval, and consensus intelligence, SecRitual AI transforms cybersecurity from reactive infrastructure monitoring into a proactive, explainable **AI Security Courtroom**. 
+By combining AI debate, contextual evidence retrieval, and consensus intelligence, SecRitual AI transforms cybersecurity from reactive infrastructure monitoring into a proactive, explainable **Trust Governance Engine**. 
 
 SecRitual AI validates deployment decisions in logic, ensuring that the AI revolution proceeds with absolute trust and transparency.
 

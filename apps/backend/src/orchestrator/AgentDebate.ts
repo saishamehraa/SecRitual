@@ -1,4 +1,5 @@
 import { generateAIResponse } from '../services/ai';
+import { retrieveFoundryEvidence } from '../services/foundryIQ';
 
 export async function orchestrateDebate(threatContext: string) {
   console.log("Starting Agent Debate on context:", threatContext);
@@ -15,11 +16,15 @@ export async function orchestrateDebate(threatContext: string) {
     `You are CodeSage, a static analysis AI. Given the threat context (${threatContext}), output a 1-sentence vulnerability impact.`
   );
 
+  // Retrieve Contextual Enterprise Evidence via Foundry IQ
+  const foundryIQEvidence = await retrieveFoundryEvidence(threatContext);
+
   const consensus = await generateAIResponse(
-    `You are the Orchestrator. Summarize the following agent debate into a final 1-sentence Deployment Verdict (must start with "Consensus reached: BLOCK" or "Consensus reached: PASS").
+    `You are the Orchestrator. Summarize the following agent debate and Foundry IQ Evidence into a final 1-sentence Deployment Verdict (must start with "Consensus reached: BLOCK" or "Consensus reached: PASS").
     PromptShield: ${promptShieldAnalysis}
     SIFTGuardian: ${siftGuardianAnalysis}
-    CodeSage: ${codeSageAnalysis}`
+    CodeSage: ${codeSageAnalysis}
+    Foundry IQ Context: ${foundryIQEvidence}`
   );
 
   return {
@@ -27,8 +32,10 @@ export async function orchestrateDebate(threatContext: string) {
       { agent: "PromptShield", msg: promptShieldAnalysis },
       { agent: "SIFTGuardian", msg: siftGuardianAnalysis },
       { agent: "CodeSage", msg: codeSageAnalysis },
+      { agent: "Foundry IQ", msg: `Context Retrieved: ${foundryIQEvidence}` },
       { agent: "Orchestrator", msg: consensus }
     ],
-    verdict: consensus.includes("BLOCK") ? "BLOCK" : "PASS"
+    verdict: consensus.includes("BLOCK") ? "BLOCK" : "PASS",
+    foundryIqEvidence: foundryIQEvidence
   };
 }

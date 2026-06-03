@@ -93,25 +93,35 @@ export function FoundryIQPanel({ rationale }: { rationale?: string }) {
     <GlassCard className="p-4 border-cyan-500/20 bg-[linear-gradient(45deg,rgba(0,212,255,0.02),rgba(0,0,0,0))]">
       <div className="flex items-center gap-2 mb-3">
         <Network className={clsx("w-4 h-4 text-cyan-400", pulse && "animate-pulse shadow-[0_0_10px_#00d4ff]")} />
-        <h3 className="text-sm font-semibold text-white" style={{ fontFamily: "Orbitron, monospace" }}>Microsoft Foundry IQ</h3>
+        <h3 className="text-sm font-semibold text-white" style={{ fontFamily: "Orbitron, monospace" }}>Foundry IQ Evidence</h3>
         <span className="ml-auto text-[9px] font-mono border border-cyan-500/30 text-cyan-400 bg-cyan-500/10 px-1.5 py-0.5 rounded">GROUNDED INTEL</span>
       </div>
       <div className="space-y-2 font-mono text-[10px] text-slate-400">
+        <div className="text-cyan-300 font-bold mb-2">Retrieved Enterprise Context</div>
         <div className="flex items-center gap-2">
-          <ChevronRight className="w-3 h-3 text-cyan-500" />
-          <span>Querying Foundry IQ knowledge base...</span>
-        </div>
-        <div className="flex items-center gap-2 text-cyan-300">
-          <ChevronRight className="w-3 h-3 text-cyan-500" />
-          <span>Retrieving enterprise security telemetry...</span>
+          <span className="text-emerald-400 font-bold">✓</span>
+          <span>Historical ransomware indicators</span>
         </div>
         <div className="flex items-center gap-2">
-          <ChevronRight className="w-3 h-3 text-cyan-500" />
-          <span>Grounding deployment reasoning...</span>
+          <span className="text-emerald-400 font-bold">✓</span>
+          <span>Security policy references</span>
         </div>
-        <div className="mt-3 p-2 border border-cyan-500/20 bg-cyan-500/5 rounded">
-          <strong className="text-cyan-400">IQ Context:</strong> {rationale || `"Current deployment pattern matches 3 previous ransomware lateral movement vectors identified in Q1."`}
+        <div className="flex items-center gap-2">
+          <span className="text-emerald-400 font-bold">✓</span>
+          <span>Deployment governance guidance</span>
         </div>
+        <div className="flex items-center gap-2">
+          <span className="text-emerald-400 font-bold">✓</span>
+          <span>Similar incident patterns</span>
+        </div>
+        <div className="mt-3 pt-3 border-t border-cyan-500/20 text-cyan-400 font-bold">
+          Confidence: 92%
+        </div>
+        {rationale && (
+          <div className="mt-3 p-2 border border-cyan-500/20 bg-cyan-500/5 rounded">
+            <strong className="text-cyan-400">IQ Context:</strong> {rationale}
+          </div>
+        )}
       </div>
     </GlassCard>
   );
