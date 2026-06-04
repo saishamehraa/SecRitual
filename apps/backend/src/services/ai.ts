@@ -15,7 +15,7 @@ const openai = new OpenAI({
 // Ollama Fallback
 const OLLAMA_URL = process.env.OLLAMA_URL || "http://localhost:11434/api/generate";
 
-export async function generateAIResponse(prompt: string, model: string = "google/gemini-2.0-flash-lite-001") {
+export async function generateAIResponse(prompt: string, model: string = "google/gemini-2.5-flash-lite-preview-09-2025") {
   try {
     if (!process.env.OPENROUTER_API_KEY) {
       console.warn("No OpenRouter Key provided. Attempting Ollama fallback...");
@@ -30,7 +30,7 @@ export async function generateAIResponse(prompt: string, model: string = "google
       });
     } catch (err: any) {
       if (err?.status === 402 || err?.status === 429) {
-        console.warn(`OpenRouter model ${model} failed (${err.status}). Trying google/gemini-2.0-flash-lite-001...`);
+        console.warn(`OpenRouter model ${model} failed (${err.status}). Trying google/gemini-2.5-flash-lite-preview-09-2025...`);
         completion = await openai.chat.completions.create({
           model: "google/gemini-2.5-flash-lite",
           messages: [{ role: "user", content: prompt }]
