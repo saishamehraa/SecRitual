@@ -269,6 +269,36 @@ const updateLogs = (newLogs: any) => {
   globalAgentLogs = newLogs; localStorage.setItem('secritual_logs', JSON.stringify(globalAgentLogs)); feedListeners.forEach(l => l(globalAgentLogs)); 
 };
 
+const initSSE = () => {
+  if (!evtSource) {
+    const baseUrl = (import.meta as any).env?.DEV ? "http://localhost:4000" : "";
+    evtSource = new EventSource(`${baseUrl}/stream`);
+    evtSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        if (data.type === "debate_result") {
+          updateMetrics({ ...globalMetrics, threats: globalMetrics.threats + 1, blocked: globalMetrics.blocked + (data.verdict === 'BLOCK' ? 1 : 0), cves: globalMetrics.cves });
+          updateVerdict(data);
+          if (data.debate && Array.isArray(data.debate)) {
+            data.debate.forEach((d: any, idx: number) => {
+              const safeAgent = (d.agent || '').trim();
+              const agentColor = safeAgent === 'PromptShield' ? '#00d4ff' : safeAgent === 'SIFTGuardian' ? '#f97316' : safeAgent === 'CodeSage' ? '#10b981' : '#7c3aed';
+              const level = safeAgent === 'Orchestrator' ? (d.msg.includes('PASS') ? 'success' : 'critical') : 'warn';
+              setTimeout(() => {
+                updateLogs([...globalAgentLogs, { agent: safeAgent, msg: d.msg, level: level, color: agentColor }].slice(-22));
+              }, idx * 1000);
+            });
+          }
+        }
+        if (data.type === "heartbeat" && data.threats > 0) {
+          updateMetrics({ ...globalMetrics, threats: globalMetrics.threats + data.threats });
+        }
+      } catch (e) {}
+    };
+  }
+};
+initSSE();
+
 function AgentFeed() {
   const [logs, setLogs] = useState<typeof AGENT_LOGS>(globalAgentLogs);
   const bottomRef = useRef<HTMLDivElement>(null);
@@ -278,32 +308,7 @@ function AgentFeed() {
   useEffect(() => {
     feedListeners.add(setLogs);
 
-    if (!evtSource) {
-      const baseUrl = (import.meta as any).env?.DEV ? "http://localhost:4000" : "";
-      evtSource = new EventSource(`${baseUrl}/stream`);
-      evtSource.onmessage = (event) => {
-        try {
-          const data = JSON.parse(event.data);
-          if (data.type === "debate_result") {
-            updateMetrics({ ...globalMetrics, threats: globalMetrics.threats + 1, blocked: globalMetrics.blocked + (data.verdict === 'BLOCK' ? 1 : 0), cves: globalMetrics.cves });
-            updateVerdict(data);
-            data.debate.forEach((d: any, idx: number) => {
-              const safeAgent = (d.agent || '').trim();
-              const agentColor = safeAgent === 'PromptShield' ? '#00d4ff' : safeAgent === 'SIFTGuardian' ? '#f97316' : safeAgent === 'CodeSage' ? '#10b981' : '#7c3aed';
-              const level = safeAgent === 'Orchestrator' ? (d.msg.includes('PASS') ? 'success' : 'critical') : 'warn';
-              setTimeout(() => {
-                updateLogs([...globalAgentLogs, { agent: safeAgent, msg: d.msg, level: level, color: agentColor }].slice(-22));
-              }, idx * 1000); // Stagger the debate logs for cinematic effect
-            });
-          }
-          if (data.type === "heartbeat" && data.threats > 0) {
-            updateMetrics({ ...globalMetrics, threats: globalMetrics.threats + data.threats });
-          }
-        } catch (e) {}
-      };
-    }
-
-    // Real SSE streaming only. Fallback interval removed.
+    // Real SSE streaming globally managed now.
     return () => {
       feedListeners.delete(setLogs);
     };
